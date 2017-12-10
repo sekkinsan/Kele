@@ -1,6 +1,7 @@
 
 require 'httparty'
 require 'json'
+require './lib/roadmap'
 
 class Kele
   include HTTParty
@@ -27,6 +28,17 @@ class Kele
     response = self.class.get("/mentors/#{mentor_id}/student_availability", headers: { "authorization" => @auth_token })
     JSON.parse(response.body)
   end
+
+  def get_messages(page = nil)
+    if page == nil
+      response = self.class.get("/message_threads", headers: { "authorization" => @auth })
+    else 
+      response = self.class.get("/message_threads", headers: { "authorization" => @auth })
+    end
+
+    JSON.parse(response.body)
+  end
+
 
 
 
